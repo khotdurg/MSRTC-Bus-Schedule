@@ -20,6 +20,7 @@ public class BusScheduleController {
     }
 
     //List of all the bus
+    @GetMapping("/list")
     public ResponseEntity<List<BusSchedule>> getAll(){
         List<BusSchedule> busSchedules = busScheduleService.getAllBusSchedules();
         return ResponseEntity.ok(busSchedules);
@@ -32,4 +33,17 @@ public class BusScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createBusSchedule);
     }
 
+    //update existing bus
+    @PutMapping("/{id}")
+    public ResponseEntity<BusSchedule> update(@PathVariable int id, @RequestBody BusSchedule updateBusSchedule){
+        BusSchedule updatedBusSchedule = busScheduleService.updateBusSchedule(id, updateBusSchedule);
+        return ResponseEntity.ok(updatedBusSchedule);
+    }
+
+    //Search as per source to destination
+    @GetMapping("/search")
+    public ResponseEntity<List<BusSchedule>> findBySourceAndDestination(@RequestParam String source,@RequestParam String destination){
+        List<BusSchedule> busSchedules = busScheduleService.findBusScheduleBySourceAndDestination(source, destination);
+        return ResponseEntity.ok(busSchedules);
+    }
 }

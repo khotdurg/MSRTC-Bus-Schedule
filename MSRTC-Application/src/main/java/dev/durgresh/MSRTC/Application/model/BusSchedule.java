@@ -1,10 +1,7 @@
 package dev.durgresh.MSRTC.Application.model;
 
 import dev.durgresh.MSRTC.Application.model.enums.BusType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +14,8 @@ public class BusSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String busNumber;
+
+    @Enumerated(EnumType.STRING)
     private BusType busType;
     private String source;
     private String destination;
